@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katonah Construction — Landscaping & Masonry</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --stone:   #2C2A25;
+    --earth:   #3D3830;
+    --moss:    #4A5240;
+    --sage:    #7A8C6A;
+    --gold:    #C8A96E;
+    --cream:   #F2EDE4;
+    --warm:    #EDE5D8;
+    --light:   #F8F5F0;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--light);
+    color: var(--stone);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 5rem;
+    background: rgba(44,42,37,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(200,169,110,0.2);
+    transition: padding 0.3s;
+  }
+
+  .logo-mark {
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+
+  .logo-icon {
+    width: 38px; height: 38px;
+    background: var(--gold);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--cream);
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+
+  .logo-text span {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+
+  .nav-links a {
+    color: rgba(242,237,228,0.7);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--stone) !important;
+    padding: 0.65rem 1.6rem !important;
+    border-radius: 2px;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+    letter-spacing: 1px !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--cream) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(44,42,37,0.92) 0%, rgba(44,42,37,0.6) 55%, rgba(44,42,37,0.1) 100%),
+      url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80') center/cover no-repeat;
+  }
+
+  /* Subtle texture overlay */
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  .hero-content {
+    position: relative;
+    padding: 0 5rem 8rem;
+    max-width: 720px;
+    animation: heroIn 1.2s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(200,169,110,0.15);
+    border: 1px solid rgba(200,169,110,0.4);
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.8rem;
+    font-weight: 600;
+  }
+
+  .badge::before { content: '★'; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    color: var(--cream);
+    line-height: 1.0;
+    margin-bottom: 1.5rem;
+    font-weight: 900;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero p {
+    color: rgba(242,237,228,0.72);
+    font-size: 1.15rem;
+    line-height: 1.75;
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--stone);
+    padding: 1rem 2.4rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-gold:hover { background: var(--cream); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 1rem 2.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(242,237,228,0.35);
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Trust strip */
+  .trust-strip {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: var(--gold);
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    padding: 1rem 4rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 7rem 5rem;
+    background: var(--light);
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
+
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: var(--stone);
+    line-height: 1.1;
+    font-weight: 900;
+    max-width: 600px;
+  }
+
+  .section-title em { color: var(--sage); font-style: italic; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--warm);
+  }
+
+  .service-card {
+    background: var(--light);
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: background 0.3s;
+  }
+
+  .service-card:hover { background: var(--cream); }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover::before { transform: scaleY(1); }
+
+  .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: rgba(44,42,37,0.06);
+    line-height: 1;
+    margin-bottom: 1.2rem;
+    font-weight: 900;
+  }
+
+  .service-icon-wrap {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .service-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--stone);
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(44,42,37,0.62);
+    font-weight: 300;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+  }
+
+  .about-visual {
+    background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80') center/cover;
+    position: relative;
+  }
+
+  .about-visual::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(74,82,64,0.3), transparent);
+  }
+
+  .stat-badge {
+    position: absolute;
+    bottom: 3rem; left: 3rem;
+    background: var(--gold);
+    padding: 1.5rem 2rem;
+    z-index: 1;
+  }
+
+  .stat-badge .big { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--stone); line-height: 1; }
+  .stat-badge .label { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--stone); opacity: 0.75; }
+
+  .about-text {
+    background: var(--stone);
+    padding: 6rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-text .section-eyebrow { color: var(--gold); }
+  .about-text .section-title { color: var(--cream); }
+  .about-text .section-title em { color: var(--gold); }
+
+  .about-text p {
+    color: rgba(242,237,228,0.65);
+    font-size: 1rem;
+    line-height: 1.85;
+    margin: 1.8rem 0 2.5rem;
+    font-weight: 300;
+  }
+
+  .verify-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .verify-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-size: 0.85rem;
+    color: rgba(242,237,228,0.75);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .verify-item::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  /* ── REVIEWS ── */
+  .reviews {
+    padding: 7rem 5rem;
+    background: var(--warm);
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .review-card {
+    background: var(--light);
+    padding: 2.5rem;
+    border-radius: 2px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(44,42,37,0.12); }
+
+  .review-card::before {
+    content: '"';
+    position: absolute;
+    top: 1.2rem; right: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.2;
+    line-height: 1;
+  }
+
+  .review-card p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: rgba(44,42,37,0.72);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .reviewer {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--stone);
+    text-transform: uppercase;
+  }
+
+  .reviewer-meta {
+    font-size: 0.78rem;
+    color: var(--sage);
+    margin-top: 0.2rem;
+  }
+
+  /* ── SERVICE AREA ── */
+  .service-area {
+    background: var(--moss);
+    padding: 6rem 5rem;
+  }
+
+  .service-area .section-eyebrow { color: rgba(200,169,110,0.8); }
+  .service-area .section-title { color: var(--cream); }
+
+  .area-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.5rem;
+    margin-top: 3rem;
+  }
+
+  .area-tag {
+    background: rgba(242,237,228,0.08);
+    border: 1px solid rgba(242,237,228,0.15);
+    color: rgba(242,237,228,0.7);
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-align: center;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .area-tag:hover { background: var(--gold); color: var(--stone); border-color: var(--gold); }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--stone);
+    padding: 8rem 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: 'KC';
+    position: absolute;
+    right: 4rem; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 20rem;
+    font-weight: 900;
+    color: rgba(200,169,110,0.05);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .cta-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--cream);
+    line-height: 1.1;
+    font-weight: 900;
+    margin-bottom: 1rem;
+  }
+
+  .cta-left h2 em { color: var(--gold); font-style: italic; }
+
+  .cta-left p {
+    color: rgba(242,237,228,0.6);
+    font-size: 1rem;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .phone-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .phone-display:hover { color: var(--cream); }
+
+  .phone-label {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(242,237,228,0.4);
+    font-weight: 600;
+    margin-bottom: -0.5rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #1A1915;
+    padding: 2.5rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-top: 1px solid rgba(200,169,110,0.15);
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(242,237,228,0.3);
+    letter-spacing: 0.5px;
+  }
+
+  footer .logo-text { font-size: 1rem; color: var(--cream); }
+  footer .logo-text span { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1000px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero-content { padding: 0 2rem 6rem; }
+    .services, .reviews, .service-area, .cta-section { padding-left: 2rem; padding-right: 2rem; }
+    .services-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .about { grid-template-columns: 1fr; }
+    .about-visual { min-height: 350px; }
+    .about-text { padding: 4rem 2rem; }
+    .cta-section { flex-direction: column; }
+    footer { padding: 2rem; flex-direction: column; text-align: center; }
+    .trust-strip { gap: 1.5rem; padding: 1rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-mark">
+    <div class="logo-icon">⬡</div>
+    <div class="logo-text">
+      Katonah Construction
+      <span>Landscaping & Masonry</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#areas">Service Areas</a>
+    <a href="#contact" class="nav-cta">Free Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="badge">5.0 Stars · 33 Google Reviews · Google Verified</div>
+    <h1>Built to<br><em>Last.</em><br>Built Right.</h1>
+    <p>Katonah Construction transforms outdoor spaces across Westchester and Fairfield County — with expert craftsmanship in landscaping, masonry, concrete, and hardscaping.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-gold">Get a Free Quote</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+  </div>
+  <div class="trust-strip">
+    <div class="trust-item">✔ Google Verified</div>
+    <div class="trust-item">✔ License Checked</div>
+    <div class="trust-item">✔ Background Checked</div>
+    <div class="trust-item">✔ 9+ Years in Business</div>
+    <div class="trust-item">✔ Owner on Every Job</div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-eyebrow">What We Do</div>
+    <h2 class="section-title">Complete Outdoor<br><em>Transformation</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon-wrap">🪨</div>
+      <h3>Concrete Masonry</h3>
+      <p>Foundations, patios, garage pads, and structural concrete work delivered with precision and durability that stands the test of time.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon-wrap">🏡</div>
+      <h3>Hardscapes</h3>
+      <p>Retaining walls, outdoor steps, patios, and custom stone features — beautifully integrated with your landscape design.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon-wrap">🌿</div>
+      <h3>Landscape Design</h3>
+      <p>Full-service landscape installations, grading, resloping, and garden decorations tailored to your property's natural character.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon-wrap">🛣️</div>
+      <h3>Driveways & Walkways</h3>
+      <p>Driveway landscaping, paving, and walkway construction that boosts curb appeal and withstands heavy use season after season.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-icon-wrap">💧</div>
+      <h3>Water Features & Turf</h3>
+      <p>Elegant outdoor water features plus artificial turf installation for low-maintenance, year-round beauty in your yard.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-icon-wrap">❄️</div>
+      <h3>Year-Round Service</h3>
+      <p>From landscaping in the growing season to plowing and drainage work in winter — we're your year-round outdoor partner.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="stat-badge">
+      <div class="big">5.0★</div>
+      <div class="label">33 Google Reviews</div>
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="section-eyebrow">About Brandon & The Team</div>
+    <h2 class="section-title">The Owner Shows Up.<br><em>Every Time.</em></h2>
+    <p>Brandon founded Katonah Construction on a simple promise: show up, do the work right, and treat every client's property like your own. With 9+ years serving Westchester and Fairfield County, his crew has earned a reputation for exceptional quality, honest pricing, and the kind of personal attention that big firms simply can't offer.</p>
+    <div class="verify-items">
+      <div class="verify-item">Google Verified Business — License & Background Checked</div>
+      <div class="verify-item">Owner-present on every project for quality control</div>
+      <div class="verify-item">Fair, transparent pricing — often 5x–10x less than big firms</div>
+      <div class="verify-item">Responsive communication throughout every job</div>
+    </div>
+    <a href="#contact" class="btn-gold">Start Your Project</a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="section-header">
+    <div class="section-eyebrow">What Clients Say</div>
+    <h2 class="section-title">5 Stars.<br><em>Every Time.</em></h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>Brandon and his crew did an outstanding job — pouring a solid garage foundation and building a beautiful concrete patio. Their craftsmanship was excellent, the team was always prompt and courteous, and the results exceeded our expectations. Pricing was very competitive for the quality delivered.</p>
+      <div class="reviewer">John Lewis</div>
+      <div class="reviewer-meta">3 months ago · Somers, NY</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>Exceptional quality and prompt service. Katonah Construction's value for money was between 5X and 10X better than other big name construction firms. Brandon is honest, a great listener, highly customer oriented. They are my go-to masonry company.</p>
+      <div class="reviewer">Alan Renne</div>
+      <div class="reviewer-meta">1 year ago · Westchester County</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>We've had several landscapers over 25 years, and Katonah Construction is the best. Brandon is awesome — responsive, reliable, and has handled several major jobs including drainage and masonry, as well as our weekly landscaping and plowing in the winter.</p>
+      <div class="reviewer">Debbie Roschelle</div>
+      <div class="reviewer-meta">6 months ago · Repeat Customer</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>Brandon was extremely responsive and knowledgeable and his prices are fair. His crew was on time and professional, with all the right equipment to get the job done quickly and properly — and they cleaned up everything before they left. I would definitely hire him again, hands down.</p>
+      <div class="reviewer">Mike Ransom</div>
+      <div class="reviewer-meta">Verified Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>We had a great experience with Brandon and team repairing our retaining wall. He was very professional and great with communication, making sure we were pleased with the outcome. They did a very nice job.</p>
+      <div class="reviewer">Lainie Gussman</div>
+      <div class="reviewer-meta">4 months ago · Retaining Wall Repair</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>Brandon is my go-to guy. He handles all my landscaping needs. He is one of the hardest working owners out there. He takes my call at all hours and makes it so easy to recommend his company. If you want someone who always does the right thing, call Brandon.</p>
+      <div class="reviewer">Bill G.</div>
+      <div class="reviewer-meta">Local Guide · 6 months ago</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="service-area" id="areas">
+  <div class="section-header">
+    <div class="section-eyebrow">Where We Work</div>
+    <h2 class="section-title" style="color:var(--cream)">Serving Westchester<br><em style="color:var(--gold)">& Fairfield County</em></h2>
+  </div>
+  <div class="area-grid">
+    <div class="area-tag">Katonah</div>
+    <div class="area-tag">Carmel Hamlet</div>
+    <div class="area-tag">Bedford</div>
+    <div class="area-tag">North Salem</div>
+    <div class="area-tag">South Salem</div>
+    <div class="area-tag">Mount Kisco</div>
+    <div class="area-tag">Armonk</div>
+    <div class="area-tag">White Plains</div>
+    <div class="area-tag">Scarsdale</div>
+    <div class="area-tag">Mamaroneck</div>
+    <div class="area-tag">Larchmont</div>
+    <div class="area-tag">Rye</div>
+    <div class="area-tag">Rye Brook</div>
+    <div class="area-tag">Harrison</div>
+    <div class="area-tag">Bronxville</div>
+    <div class="area-tag">Irvington</div>
+    <div class="area-tag">Tarrytown</div>
+    <div class="area-tag">Pleasantville</div>
+    <div class="area-tag">Goldens Bridge</div>
+    <div class="area-tag">Greenville</div>
+    <div class="area-tag">Darien</div>
+    <div class="area-tag">New Canaan</div>
+    <div class="area-tag">Westport</div>
+    <div class="area-tag">Greenwich</div>
+    <div class="area-tag">Ridgefield</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-left">
+    <h2>Ready to Transform<br>Your <em>Outdoor Space?</em></h2>
+    <p>Call Brandon directly or request a free quote. We're responsive, honest, and ready to make your project happen — on time, on budget, and built to last.</p>
+  </div>
+  <div class="cta-right">
+    <div class="phone-label">Call Us Directly</div>
+    <a href="tel:9143413024" class="phone-display">(914) 341-3024</a>
+    <a href="mailto:info@katonahconstruction.com" class="btn-gold" style="margin-top:0.5rem;">Request a Free Quote</a>
+    <p style="font-size:0.78rem; color:rgba(242,237,228,0.35); margin-top:0.5rem;">Open · Closes 6 PM · Background & License Verified</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-mark">
+    <div class="logo-text" style="color:var(--cream)">
+      Katonah Construction
+      <span>© 2025 All Rights Reserved</span>
+    </div>
+  </div>
+  <p>Serving Westchester & Fairfield County · (914) 341-3024</p>
+</footer>
+
+</body>
+</html>
